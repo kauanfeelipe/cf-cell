@@ -75,7 +75,7 @@ const Products = () => {
                 ) : (
                     <div className="flex overflow-x-auto snap-x snap-mandatory pb-8 -mx-4 px-4 gap-6 scrollbar-thin scrollbar-thumb-primary/50 scrollbar-track-white/5">
                         {products.map((product, index) => (
-                            <div key={index} className="min-w-[280px] md:min-w-[340px] lg:min-w-[380px] snap-center flex-shrink-0">
+                            <div key={index} className="w-[280px] md:w-[340px] lg:w-[380px] snap-center flex-shrink-0">
                                 <ProductCard
                                     {...product}
                                     delay={index * 0.1}
