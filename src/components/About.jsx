@@ -15,7 +15,7 @@ const About = () => {
                     >
                         <div className="mb-6 lg:hidden flex justify-center">
                             <img
-                                src="/imagens/cf-cell.jpg"
+                                src="/cf-cell.jpg"
                                 alt="CF CELL Logo"
                                 className="h-20 w-auto rounded-xl border border-white/10 shadow-lg"
                             />
@@ -64,7 +64,7 @@ const About = () => {
                     >
                         <div className="relative z-10 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
                             <img
-                                src="/imagens/cf-cell.jpg"
+                                src="/cf-cell.jpg"
                                 alt="CF CELL Loja"
                                 className="w-full h-auto object-cover"
                             />

@@ -90,6 +90,7 @@ function App() {
                 <Route index element={<AdminDashboard />} />
             </Route>
             <Route path="/" element={<PublicLayout />} />
+            <Route path="*" element={<PublicLayout />} />
         </Routes>
     );
 }
