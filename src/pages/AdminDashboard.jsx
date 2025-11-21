@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabaseClient';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { LogOut, Plus, Package, Trash2, Edit, X, Save, Search, Home } from 'lucide-react';
 
 const AdminDashboard = () => {
@@ -164,13 +164,13 @@ const AdminDashboard = () => {
                     <span className="bg-white/5 px-3 py-1 rounded-full text-xs text-gray-400 border border-white/10">Dashboard</span>
                 </div>
                 <div className="flex items-center gap-3">
-                    <a
-                        href="/"
+                    <Link
+                        to="/"
                         className="flex items-center gap-2 text-gray-400 hover:text-primary transition-colors text-sm font-medium"
                     >
                         <Home size={18} />
                         <span className="hidden sm:inline">Ir para o Site</span>
-                    </a>
+                    </Link>
                     <button
                         onClick={handleLogout}
                         className="flex items-center gap-2 text-gray-400 hover:text-red-400 transition-colors text-sm font-medium"

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { supabase } from '../lib/supabaseClient';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Lock, Mail, Home } from 'lucide-react';
 
 const AdminLogin = () => {
+    // ... existing code ...
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
@@ -86,13 +87,13 @@ const AdminLogin = () => {
                 </form>
 
                 <div className="mt-6 pt-6 border-t border-white/10">
-                    <a
-                        href="/"
+                    <Link
+                        to="/"
                         className="flex items-center justify-center gap-2 w-full bg-white/5 hover:bg-white/10 text-white font-medium py-3 rounded-lg transition-all duration-300 border border-white/10 hover:border-primary/50"
                     >
                         <Home size={20} />
                         Ir para o Site
-                    </a>
+                    </Link>
                 </div>
             </div>
         </div>

@@ -69,7 +69,7 @@ const Hero = () => {
                             <div className="relative group">
                                 <div className="absolute -inset-1 bg-gradient-to-r from-primary via-primary-light to-primary rounded-3xl blur-md opacity-50 group-hover:opacity-75 transition duration-500"></div>
                                 <img
-                                    src="/cf-cell.jpg"
+                                    src={`${import.meta.env.BASE_URL}cf-cell.jpg`}
                                     alt="CF CELL"
                                     className="relative h-40 md:h-36 lg:h-40 w-auto rounded-3xl border-2 border-primary/30 shadow-[0_0_30px_rgba(255,215,0,0.3)] hover:shadow-[0_0_50px_rgba(255,215,0,0.5)] transition-all duration-300"
                                 />
