@@ -36,7 +36,7 @@ const ImageCarousel = ({ images, currentIndex, onPrev, onNext, onSelect, isLoadi
                 <>
                     <button
                         onClick={onPrev}
-                        className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/30 backdrop-blur-md text-white hover:bg-primary hover:text-dark transition-all opacity-0 group-hover:opacity-100"
+                        className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/40 backdrop-blur-md text-white hover:bg-primary hover:text-dark transition-all opacity-100 md:opacity-0 md:group-hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                         aria-label="Imagem anterior"
                         type="button"
                     >
@@ -44,7 +44,7 @@ const ImageCarousel = ({ images, currentIndex, onPrev, onNext, onSelect, isLoadi
                     </button>
                     <button
                         onClick={onNext}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/30 backdrop-blur-md text-white hover:bg-primary hover:text-dark transition-all opacity-0 group-hover:opacity-100"
+                        className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/40 backdrop-blur-md text-white hover:bg-primary hover:text-dark transition-all opacity-100 md:opacity-0 md:group-hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                         aria-label="Próxima imagem"
                         type="button"
                     >
@@ -119,12 +119,20 @@ const Hero = () => {
                             className="flex justify-center lg:justify-start mb-20 lg:mb-20 lg:relative lg:right-[-43%]"
                         >
                             <div className="relative group">
-                                <div className="absolute -inset-1 bg-gradient-to-r from-primary via-primary-light to-primary rounded-3xl blur-md opacity-50 group-hover:opacity-75 transition duration-500" />
-                                <img
-                                    src={`${import.meta.env.BASE_URL}cf-cell.jpg`}
-                                    alt="CF CELL"
-                                    className="relative h-40 md:h-36 lg:h-40 w-auto rounded-3xl border-2 border-primary/30 shadow-[0_0_30px_rgba(255,215,0,0.3)] hover:shadow-[0_0_50px_rgba(255,215,0,0.5)] transition-all duration-300"
-                                />
+                                <div className="absolute -inset-3 bg-gradient-to-r from-primary via-white/80 to-primary rounded-[32px] blur-xl opacity-40 group-hover:opacity-70 transition duration-500" />
+                                <div className="relative rounded-[32px] p-1 bg-gradient-to-r from-primary via-white to-primary shadow-[0_0_40px_rgba(255,215,0,0.35)]">
+                                    <div className="relative rounded-[28px] overflow-hidden border border-white/20 bg-black/60">
+                                        <img
+                                            src={`${import.meta.env.BASE_URL}img-head.jpg`}
+                                            alt="CF CELL"
+                                            className="h-40 md:h-38 lg:h-48 w-full object-cover mix-blend-screen"
+                                            loading="lazy"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-primary/5" />
+                                        <div className="absolute inset-0 border border-white/10 rounded-[28px]" />
+                                    </div>
+                                </div>
+                                <div className="absolute inset-0 rounded-[32px] border border-primary/40 opacity-70 animate-pulse pointer-events-none" />
                             </div>
                         </motion.div>
                         

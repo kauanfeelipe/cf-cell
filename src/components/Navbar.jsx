@@ -5,10 +5,22 @@ import { cn } from '../lib/utils';
 import { useWhatsApp } from '../hooks/useWhatsApp';
 import { CONFIG } from '../config/constants';
 
-const Navbar = () => {
+const Navbar = ({ onContactClick }) => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const { openDefaultChat, whatsappUrl } = useWhatsApp();
+
+    const handleContactClick = useCallback(
+        (event) => {
+            event.preventDefault();
+            if (onContactClick) {
+                onContactClick(event);
+                return;
+            }
+            openDefaultChat();
+        },
+        [onContactClick, openDefaultChat]
+    );
 
     useEffect(() => {
         const handleScroll = () => {
@@ -60,10 +72,7 @@ const Navbar = () => {
                         href={whatsappUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            openDefaultChat();
-                        }}
+                        onClick={handleContactClick}
                         className="btn-primary flex items-center gap-2 !py-2 !px-6 text-sm"
                     >
                         <Phone size={18} />
@@ -95,7 +104,7 @@ const Navbar = () => {
                                 <a
                                     key={link.name}
                                     href={link.href}
-                                    className="text-lg font-medium text-white hover:text-primary transition-colors"
+                                    className="text-lg font-semibold font-heading uppercase tracking-[0.3em] text-white text-center hover:text-primary transition-colors"
                                     onClick={() => setIsMobileMenuOpen(false)}
                                 >
                                     {link.name}
@@ -106,9 +115,9 @@ const Navbar = () => {
                                     href={whatsappUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        openDefaultChat();
+                                    onClick={(event) => {
+                                        handleContactClick(event);
+                                        setIsMobileMenuOpen(false);
                                     }}
                                     className="btn-primary text-center flex justify-center items-center gap-2"
                                 >

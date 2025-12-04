@@ -40,51 +40,54 @@ const ProductForm = ({
     isSubmitting,
     isEditing 
 }) => (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 md:p-4 bg-black/80 backdrop-blur-sm overflow-y-auto">
-        <div className="bg-dark-surface border border-white/10 rounded-2xl p-4 md:p-6 max-w-2xl w-full shadow-2xl my-4 md:my-8">
-            <div className="flex justify-between items-center mb-4 md:mb-6">
-                <h3 className="text-2xl font-bold text-white flex items-center gap-2">
-                    {isEditing ? <Edit className="text-primary" /> : <Plus className="text-primary" />}
-                    {isEditing ? 'Editar Celular' : 'Novo Celular'}
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 lg:p-6 bg-black/80 backdrop-blur-sm overflow-y-auto">
+        <div className="bg-dark-surface border border-white/10 rounded-xl sm:rounded-2xl p-4 sm:p-5 lg:p-6 w-full max-w-[calc(100vw-1.5rem)] sm:max-w-[calc(100vw-2rem)] lg:max-w-5xl xl:max-w-6xl shadow-2xl my-auto max-h-[calc(100vh-1.5rem)] sm:max-h-[calc(100vh-2rem)] lg:max-h-[85vh] overflow-y-auto">
+            <div className="flex justify-between items-center mb-4 sm:mb-5 lg:mb-6 sticky top-0 bg-dark-surface z-10 -mx-4 sm:-mx-5 lg:-mx-6 px-4 sm:px-5 lg:px-6 py-3 border-b border-white/10">
+                <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-white flex items-center gap-2">
+                    {isEditing ? <Edit className="text-primary" size={20} /> : <Plus className="text-primary" size={20} />}
+                    <span className="truncate">{isEditing ? 'Editar Celular' : 'Novo Celular'}</span>
                 </h3>
                 <button 
                     onClick={onClose} 
-                    className="text-gray-400 hover:text-white transition-colors"
+                    className="text-gray-400 hover:text-white transition-colors flex-shrink-0 p-1 hover:bg-white/5 rounded-lg"
                     type="button"
+                    aria-label="Fechar"
                 >
-                    <X size={24} />
+                    <X size={20} className="sm:w-6 sm:h-6" />
                 </button>
             </div>
 
-            <form onSubmit={onSubmit} className="space-y-3 md:space-y-4">
-                <div className="grid grid-cols-2 gap-2 md:gap-4">
-                    <div className="col-span-2">
-                        <label className="block text-xs md:text-sm font-medium text-gray-400 mb-0.5">
+            <form onSubmit={onSubmit} className="space-y-3 sm:space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-5">
+                    <div className="sm:col-span-2 lg:col-span-3">
+                        <label className="block text-xs sm:text-sm font-medium text-gray-400 mb-1.5">
                             Nome do Modelo
                         </label>
                         <input 
                             name="nome" 
                             value={formData.nome} 
                             onChange={onInputChange} 
-                            className="w-full bg-dark border border-white/10 rounded-lg p-2 md:p-2.5 text-sm md:text-base text-white focus:border-primary focus:outline-none" 
+                            className="w-full bg-dark border border-white/10 rounded-lg p-2.5 sm:p-3 text-sm sm:text-base text-white focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all" 
                             required 
+                            placeholder="Ex: iPhone 13 Pro Max"
                         />
                     </div>
                     
                     <div>
-                        <label className="block text-xs md:text-sm font-medium text-gray-400 mb-0.5">
-                            Marca <span className="text-gray-600 text-xs">(Opc)</span>
+                        <label className="block text-xs sm:text-sm font-medium text-gray-400 mb-1.5">
+                            Marca <span className="text-gray-600 text-xs">(Opcional)</span>
                         </label>
                         <input 
                             name="marca" 
                             value={formData.marca} 
                             onChange={onInputChange} 
-                            className="w-full bg-dark border border-white/10 rounded-lg p-2 md:p-2.5 text-sm md:text-base text-white focus:border-primary focus:outline-none" 
+                            className="w-full bg-dark border border-white/10 rounded-lg p-2.5 sm:p-3 text-sm sm:text-base text-white focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all" 
+                            placeholder="Ex: Apple"
                         />
                     </div>
                     
                     <div>
-                        <label className="block text-xs md:text-sm font-medium text-gray-400 mb-0.5">
+                        <label className="block text-xs sm:text-sm font-medium text-gray-400 mb-1.5">
                             Valor (R$)
                         </label>
                         <input 
@@ -92,83 +95,85 @@ const ProductForm = ({
                             name="valor" 
                             value={formData.valor} 
                             onChange={onInputChange} 
-                            className="w-full bg-dark border border-white/10 rounded-lg p-2 md:p-2.5 text-sm md:text-base text-white focus:border-primary focus:outline-none" 
+                            className="w-full bg-dark border border-white/10 rounded-lg p-2.5 sm:p-3 text-sm sm:text-base text-white focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all" 
                             required 
                             min="0"
                             step="0.01"
+                            placeholder="0.00"
                         />
                     </div>
                     
                     <div>
-                        <label className="block text-xs md:text-sm font-medium text-gray-400 mb-0.5">
-                            Armazenamento <span className="text-gray-600 text-xs">(Opc)</span>
+                        <label className="block text-xs sm:text-sm font-medium text-gray-400 mb-1.5">
+                            Armazenamento <span className="text-gray-600 text-xs">(Opcional)</span>
                         </label>
                         <input 
                             name="armazenamento" 
                             value={formData.armazenamento} 
                             onChange={onInputChange} 
                             placeholder="128GB" 
-                            className="w-full bg-dark border border-white/10 rounded-lg p-2 md:p-2.5 text-sm md:text-base text-white focus:border-primary focus:outline-none" 
+                            className="w-full bg-dark border border-white/10 rounded-lg p-2.5 sm:p-3 text-sm sm:text-base text-white focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all" 
                         />
                     </div>
                     
                     <div>
-                        <label className="block text-xs md:text-sm font-medium text-gray-400 mb-0.5">
-                            RAM <span className="text-gray-600 text-xs">(Opc)</span>
+                        <label className="block text-xs sm:text-sm font-medium text-gray-400 mb-1.5">
+                            RAM <span className="text-gray-600 text-xs">(Opcional)</span>
                         </label>
                         <input 
                             name="memoria_ram" 
                             value={formData.memoria_ram} 
                             onChange={onInputChange} 
                             placeholder="4GB" 
-                            className="w-full bg-dark border border-white/10 rounded-lg p-2 md:p-2.5 text-sm md:text-base text-white focus:border-primary focus:outline-none" 
+                            className="w-full bg-dark border border-white/10 rounded-lg p-2.5 sm:p-3 text-sm sm:text-base text-white focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all" 
                         />
                     </div>
                     
                     <div>
-                        <label className="block text-xs md:text-sm font-medium text-gray-400 mb-0.5">
-                            Cor <span className="text-gray-600 text-xs">(Opc)</span>
+                        <label className="block text-xs sm:text-sm font-medium text-gray-400 mb-1.5">
+                            Cor <span className="text-gray-600 text-xs">(Opcional)</span>
                         </label>
                         <input 
                             name="cor" 
                             value={formData.cor} 
                             onChange={onInputChange} 
-                            className="w-full bg-dark border border-white/10 rounded-lg p-2 md:p-2.5 text-sm md:text-base text-white focus:border-primary focus:outline-none" 
+                            placeholder="Ex: Preto"
+                            className="w-full bg-dark border border-white/10 rounded-lg p-2.5 sm:p-3 text-sm sm:text-base text-white focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all" 
                         />
                     </div>
                     
                     <div>
-                        <label className="block text-xs md:text-sm font-medium text-gray-400 mb-0.5">
-                            Câmera <span className="text-gray-600 text-xs">(Opc)</span>
+                        <label className="block text-xs sm:text-sm font-medium text-gray-400 mb-1.5">
+                            Câmera <span className="text-gray-600 text-xs">(Opcional)</span>
                         </label>
                         <input 
                             name="camera" 
                             value={formData.camera} 
                             onChange={onInputChange} 
                             placeholder="48MP" 
-                            className="w-full bg-dark border border-white/10 rounded-lg p-2 md:p-2.5 text-sm md:text-base text-white focus:border-primary focus:outline-none" 
+                            className="w-full bg-dark border border-white/10 rounded-lg p-2.5 sm:p-3 text-sm sm:text-base text-white focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all" 
                         />
                     </div>
                     
                     <div>
-                        <label className="block text-xs md:text-sm font-medium text-gray-400 mb-0.5">
-                            Bateria <span className="text-gray-600 text-xs">(Opc)</span>
+                        <label className="block text-xs sm:text-sm font-medium text-gray-400 mb-1.5">
+                            Bateria <span className="text-gray-600 text-xs">(Opcional)</span>
                         </label>
                         <input 
                             name="bateria" 
                             value={formData.bateria} 
                             onChange={onInputChange} 
                             placeholder="5000mAh" 
-                            className="w-full bg-dark border border-white/10 rounded-lg p-2 md:p-2.5 text-sm md:text-base text-white focus:border-primary focus:outline-none" 
+                            className="w-full bg-dark border border-white/10 rounded-lg p-2.5 sm:p-3 text-sm sm:text-base text-white focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all" 
                         />
                     </div>
 
-                    <div className="col-span-2">
-                        <label className="block text-xs md:text-sm font-medium text-gray-400 mb-0.5">
+                    <div className="sm:col-span-2 lg:col-span-3">
+                        <label className="block text-xs sm:text-sm font-medium text-gray-400 mb-1.5">
                             Imagem do Produto
                         </label>
-                        <div className="flex items-center gap-4">
-                            <div className="relative w-16 h-16 md:w-20 md:h-20 bg-dark border border-white/10 rounded-lg overflow-hidden flex-shrink-0">
+                        <div className="flex items-center gap-3 sm:gap-4 bg-white/5 p-3 sm:p-4 rounded-lg border border-white/10">
+                            <div className="relative w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 bg-dark border border-white/10 rounded-lg overflow-hidden flex-shrink-0">
                                 {formData.imagem_url ? (
                                     <img 
                                         src={formData.imagem_url} 
@@ -177,42 +182,43 @@ const ProductForm = ({
                                     />
                                 ) : (
                                     <div className="w-full h-full flex items-center justify-center text-gray-600">
-                                        <Package size={20} />
+                                        <Package size={24} className="sm:w-7 sm:h-7" />
                                     </div>
                                 )}
                                 {uploading && (
-                                    <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                                        <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-primary" />
+                                    <div className="absolute inset-0 bg-black/70 flex items-center justify-center backdrop-blur-sm">
+                                        <div className="animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-t-2 border-b-2 border-primary" />
                                     </div>
                                 )}
                             </div>
-                            <div className="flex-1">
+                            <div className="flex-1 min-w-0">
                                 <input
                                     type="file"
                                     accept="image/jpeg,image/png,image/webp"
                                     onChange={onImageUpload}
-                                    className="block w-full text-xs md:text-sm text-gray-400
-                                        file:mr-2 md:file:mr-4 file:py-1.5 md:file:py-2 file:px-3 md:file:px-4
-                                        file:rounded-full file:border-0
-                                        file:text-xs md:file:text-sm file:font-semibold
+                                    className="block w-full text-xs sm:text-sm text-gray-400
+                                        file:mr-2 sm:file:mr-4 file:py-2 sm:file:py-2.5 file:px-3 sm:file:px-4
+                                        file:rounded-lg file:border-0
+                                        file:text-xs sm:file:text-sm file:font-semibold
                                         file:bg-primary file:text-dark
-                                        hover:file:bg-primary-dark
-                                        cursor-pointer"
+                                        hover:file:bg-primary-dark file:transition-colors
+                                        cursor-pointer file:shadow-md"
+                                    disabled={uploading}
                                 />
-                                <p className="text-xs text-gray-500 mt-1">JPG, PNG, WebP. Max 2MB.</p>
+                                <p className="text-xs text-gray-500 mt-1.5 truncate">JPG, PNG, WebP. Máximo 2MB.</p>
                             </div>
                         </div>
                     </div>
 
                     <div>
-                        <label className="block text-xs md:text-sm font-medium text-gray-400 mb-0.5">
+                        <label className="block text-xs sm:text-sm font-medium text-gray-400 mb-1.5">
                             Condição
                         </label>
                         <select 
                             name="condicao" 
                             value={formData.condicao} 
                             onChange={onInputChange} 
-                            className="w-full bg-dark border border-white/10 rounded-lg p-2 md:p-2.5 text-sm md:text-base text-white focus:border-primary focus:outline-none"
+                            className="w-full bg-dark border border-white/10 rounded-lg p-2.5 sm:p-3 text-sm sm:text-base text-white focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all cursor-pointer"
                         >
                             <option value="Novo">Novo</option>
                             <option value="Seminovo">Seminovo</option>
@@ -221,36 +227,36 @@ const ProductForm = ({
                     </div>
                     
                     <div>
-                        <label className="block text-xs md:text-sm font-medium text-gray-400 mb-0.5">
+                        <label className="block text-xs sm:text-sm font-medium text-gray-400 mb-1.5">
                             Situação
                         </label>
                         <select 
                             name="situacao" 
                             value={formData.situacao} 
                             onChange={onInputChange} 
-                            className="w-full bg-dark border border-white/10 rounded-lg p-2 md:p-2.5 text-sm md:text-base text-white focus:border-primary focus:outline-none"
+                            className="w-full bg-dark border border-white/10 rounded-lg p-2.5 sm:p-3 text-sm sm:text-base text-white focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all cursor-pointer"
                         >
-                            <option value="Normal">Normal</option>
+                            <option value="Normal">Normal  *não exibe tag* </option>
                             <option value="Oferta">Oferta</option>
                             <option value="Lançamento">Lançamento</option>
                         </select>
                     </div>
                 </div>
 
-                <div className="flex justify-end gap-3 mt-4 md:mt-6 pt-4 border-t border-white/10">
+                <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-2 sm:gap-3 mt-4 sm:mt-5 lg:mt-6 pt-4 sm:pt-5 border-t border-white/10 sticky bottom-0 bg-dark-surface -mx-4 sm:-mx-5 lg:-mx-6 px-4 sm:px-5 lg:px-6 pb-3">
                     <button
                         type="button"
                         onClick={onClose}
-                        className="px-6 py-2.5 rounded-lg bg-white/5 hover:bg-white/10 text-gray-300 transition-colors font-medium"
+                        className="w-full sm:w-auto px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white transition-all font-medium border border-white/10"
                     >
                         Cancelar
                     </button>
                     <button
                         type="submit"
                         disabled={uploading || isSubmitting}
-                        className="px-6 py-2.5 rounded-lg bg-primary hover:bg-primary-dark text-dark font-bold transition-all shadow-lg shadow-primary/20 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full sm:w-auto px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg bg-primary hover:bg-primary-dark text-dark font-bold transition-all shadow-lg shadow-primary/20 hover:shadow-primary/40 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-primary/20"
                     >
-                        <Save size={18} />
+                        <Save size={18} className="sm:w-5 sm:h-5" />
                         {uploading || isSubmitting ? 'Enviando...' : 'Salvar'}
                     </button>
                 </div>

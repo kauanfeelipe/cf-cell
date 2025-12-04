@@ -26,7 +26,7 @@ const About = () => {
                             <img
                                 src={logoSrc}
                                 alt="CF CELL Logo"
-                                className="h-20 w-auto rounded-xl border border-white/10 shadow-lg"
+                                className="h-28 sm:h-32 w-auto rounded-xl border border-white/10 shadow-lg"
                             />
                         </div>
                         
@@ -58,9 +58,9 @@ const About = () => {
                         initial={{ opacity: 0, scale: 0.8 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
-                        className="lg:w-1/2 relative hidden lg:block"
+                        className="lg:w-1/2 relative hidden lg:flex lg:justify-center"
                     >
-                        <div className="relative z-10 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+                        <div className="relative z-10 rounded-2xl overflow-hidden border border-white/10 shadow-2xl max-w-[420px]">
                             <img
                                 src={logoSrc}
                                 alt="CF CELL Loja"

@@ -36,7 +36,7 @@ const PublicLayout = () => {
 
     return (
         <div className="bg-dark min-h-screen text-white font-body selection:bg-primary selection:text-dark">
-            <Navbar />
+            <Navbar onContactClick={handleWhatsAppClick} />
 
             <main>
                 <Hero />

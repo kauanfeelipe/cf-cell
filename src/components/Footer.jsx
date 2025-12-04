@@ -74,7 +74,10 @@ const Footer = () => {
                     </nav>
 
                     <div className="col-span-2 md:col-span-1 lg:col-span-1">
-                        <h4 className="text-base font-bold mb-4 text-white">Localização</h4>
+                        <h4 className="text-base font-bold mb-4 text-white flex items-center gap-2">
+                            <MapPin size={18} className="text-primary" aria-hidden="true" />
+                            <span>Localização</span>
+                        </h4>
                         <div className="w-full h-40 bg-white/5 rounded-xl overflow-hidden border border-white/10 shadow-lg relative group">
                             <iframe
                                 src="https://maps.google.com/maps?q=CF%20Cell%20Nuporanga%20SP&t=&z=15&ie=UTF8&iwloc=&output=embed"

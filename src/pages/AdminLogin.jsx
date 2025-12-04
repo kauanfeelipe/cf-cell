@@ -136,7 +136,6 @@ const AdminLogin = () => {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 className="w-full bg-dark border border-white/10 rounded-lg py-3 pl-10 pr-4 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
-                                placeholder="admin@cfcell.com"
                                 required
                                 disabled={loading || isLocked}
                                 autoComplete="email"
