@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Menu, X, Phone, Instagram, Smartphone } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '../lib/utils';
+import { useWhatsApp } from '../hooks/useWhatsApp';
+import { CONFIG } from '../config/constants';
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const { openDefaultChat, whatsappUrl } = useWhatsApp();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -54,9 +57,13 @@ const Navbar = () => {
                     ))}
 
                     <a
-                        href="https://wa.me/5511999999999"
+                        href={whatsappUrl}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            openDefaultChat();
+                        }}
                         className="btn-primary flex items-center gap-2 !py-2 !px-6 text-sm"
                     >
                         <Phone size={18} />
@@ -96,16 +103,20 @@ const Navbar = () => {
                             ))}
                             <div className="pt-4 flex flex-col gap-3">
                                 <a
-                                    href="https://wa.me/5511999999999"
+                                    href={whatsappUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        openDefaultChat();
+                                    }}
                                     className="btn-primary text-center flex justify-center items-center gap-2"
                                 >
                                     <Phone size={20} />
                                     WhatsApp
                                 </a>
                                 <a
-                                    href="https://www.instagram.com/cf_assistenciatecnica_/"
+                                    href={CONFIG.INSTAGRAM.URL}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="btn-outline text-center flex justify-center items-center gap-2"
@@ -122,4 +133,4 @@ const Navbar = () => {
     );
 };
 
-export default Navbar;
+export default React.memo(Navbar);

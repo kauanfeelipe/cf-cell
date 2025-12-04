@@ -1,47 +1,69 @@
-import React from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 
 const Modal = ({ isOpen, onClose, children, title }) => {
+    const handleEscape = useCallback((e) => {
+        if (e.key === 'Escape') {
+            onClose();
+        }
+    }, [onClose]);
+
+    useEffect(() => {
+        if (isOpen) {
+            document.addEventListener('keydown', handleEscape);
+            document.body.style.overflow = 'hidden';
+        }
+        
+        return () => {
+            document.removeEventListener('keydown', handleEscape);
+            document.body.style.overflow = '';
+        };
+    }, [isOpen, handleEscape]);
+
     if (!isOpen) return null;
 
     return (
         <AnimatePresence>
             {isOpen && (
                 <>
-                    {/* Backdrop */}
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={onClose}
                         className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50"
+                        aria-hidden="true"
                     />
 
-                    {/* Modal */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95, y: 20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: 20 }}
                         className="fixed inset-0 z-50 flex items-center justify-center p-4"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby={title ? 'modal-title' : undefined}
                     >
                         <div className="glass-card rounded-2xl max-w-md w-full p-6 relative">
-                            {/* Close Button */}
                             <button
                                 onClick={onClose}
                                 className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+                                aria-label="Fechar modal"
+                                type="button"
                             >
                                 <X size={24} />
                             </button>
 
-                            {/* Title */}
                             {title && (
-                                <h3 className="text-2xl font-bold mb-6 text-gradient">
+                                <h3 
+                                    id="modal-title" 
+                                    className="text-2xl font-bold mb-6 text-gradient"
+                                >
                                     {title}
                                 </h3>
                             )}
 
-                            {/* Content */}
                             {children}
                         </div>
                     </motion.div>
@@ -51,4 +73,4 @@ const Modal = ({ isOpen, onClose, children, title }) => {
     );
 };
 
-export default Modal;
+export default React.memo(Modal);

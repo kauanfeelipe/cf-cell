@@ -2,16 +2,21 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ShieldCheck, Lock, Zap, CheckCircle2 } from 'lucide-react';
 
+const BENEFITS = [
+    'Remoção completa de ameaças',
+    'Otimização de desempenho',
+    'Preservação dos seus dados',
+    'Instalação de antivírus',
+];
+
 const VirusRemoval = () => {
     return (
         <section className="py-20 relative overflow-hidden">
-            {/* Dark gradient background */}
-            <div className="absolute inset-0 bg-gradient-to-b from-dark to-dark-lighter z-0"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-dark to-dark-lighter z-0" />
 
             <div className="container mx-auto px-4 relative z-10">
                 <div className="bg-dark-surface border border-white/5 rounded-3xl p-8 md:p-12 lg:p-16 relative overflow-hidden shadow-2xl">
-                    {/* Glow effect */}
-                    <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent opacity-50"></div>
+                    <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent opacity-50" />
 
                     <div className="flex flex-col lg:flex-row items-center gap-12">
                         <div className="lg:w-1/2">
@@ -34,20 +39,13 @@ const VirusRemoval = () => {
                                 </p>
 
                                 <ul className="space-y-4 mb-8">
-                                    {[
-                                        "Remoção completa de ameaças",
-                                        "Otimização de desempenho",
-                                        "Preservação dos seus dados",
-                                        "Instalação de antivírus"
-                                    ].map((item, index) => (
-                                        <li key={index} className="flex items-center gap-3">
-                                            <CheckCircle2 className="text-primary" size={20} />
+                                    {BENEFITS.map((item) => (
+                                        <li key={item} className="flex items-center gap-3">
+                                            <CheckCircle2 className="text-primary flex-shrink-0" size={20} />
                                             <span className="text-gray-300">{item}</span>
                                         </li>
                                     ))}
                                 </ul>
-
-
                             </motion.div>
                         </div>
 
@@ -63,7 +61,6 @@ const VirusRemoval = () => {
                                     <Lock size={80} className="text-primary animate-pulse" />
                                 </div>
 
-                                {/* Orbiting elements */}
                                 <div className="absolute inset-0 animate-spin-slow">
                                     <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-dark-surface p-3 rounded-full border border-white/10 shadow-lg">
                                         <ShieldCheck size={24} className="text-green-400" />
@@ -83,4 +80,4 @@ const VirusRemoval = () => {
     );
 };
 
-export default VirusRemoval;
+export default React.memo(VirusRemoval);

@@ -1,46 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { Smartphone, Loader } from 'lucide-react';
+import { Smartphone } from 'lucide-react';
 import ProductCard from './ProductCard';
-import { supabase } from '../lib/supabaseClient';
+import { useProductsQuery } from '../hooks/useProductsQuery';
+import { formatProductForDisplay } from '../lib/formatters';
+import LoadingSpinner from './common/LoadingSpinner';
+import ErrorMessage from './common/ErrorMessage';
+import EmptyState from './common/EmptyState';
 
 const Products = () => {
-    const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const { data, isLoading, error, isError, refetch } = useProductsQuery({ limit: 20 });
 
-    useEffect(() => {
-        const fetchProducts = async () => {
-            const { data, error } = await supabase
-                .from('celulares_venda')
-                .select('*')
-                .order('created_at', { ascending: false });
-
-            if (error) {
-                console.error('Error fetching products:', error);
-            } else {
-                // Transform data to match ProductCard props
-                const formattedProducts = data.map(item => ({
-                    image: item.imagem_url || "/imagens/phone-1.jpg", // Fallback image
-                    title: item.nome,
-                    price: `R$ ${Number(item.valor).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`,
-                    specs: [
-                        item.marca,
-                        item.armazenamento,
-                        item.memoria_ram,
-                        item.camera,
-                        item.bateria,
-                        item.cor,
-                        item.condicao
-                    ].filter(Boolean), // Remove null/undefined specs
-                    badge: item.situacao !== 'Normal' ? item.situacao : null
-                }));
-                setProducts(formattedProducts);
-            }
-            setLoading(false);
-        };
-
-        fetchProducts();
-    }, []);
+    const formattedProducts = useMemo(() => {
+        if (!data?.products) return [];
+        return data.products
+            .map(formatProductForDisplay)
+            .filter(Boolean);
+    }, [data]);
 
     return (
         <section id="products" className="py-20 bg-dark-lighter relative">
@@ -64,18 +40,26 @@ const Products = () => {
                     </p>
                 </div>
 
-                {loading ? (
-                    <div className="flex justify-center items-center h-64">
-                        <Loader className="animate-spin text-primary" size={48} />
-                    </div>
-                ) : products.length === 0 ? (
-                    <div className="text-center text-gray-500 py-12">
-                        <p>Nenhum produto disponível no momento.</p>
-                    </div>
+                {isLoading ? (
+                    <LoadingSpinner size="lg" className="h-64" />
+                ) : isError ? (
+                    <ErrorMessage 
+                        error={error} 
+                        title="Erro ao carregar produtos"
+                        onRetry={refetch}
+                    />
+                ) : formattedProducts.length === 0 ? (
+                    <EmptyState 
+                        message="Nenhum produto disponível no momento."
+                        description="Volte em breve para ver nossos produtos."
+                    />
                 ) : (
                     <div className="flex overflow-x-auto snap-x snap-mandatory pb-8 -mx-4 px-4 gap-6 scrollbar-thin scrollbar-thumb-primary/50 scrollbar-track-white/5">
-                        {products.map((product, index) => (
-                            <div key={index} className="w-[280px] md:w-[340px] lg:w-[380px] snap-center flex-shrink-0">
+                        {formattedProducts.map((product, index) => (
+                            <div 
+                                key={product.id} 
+                                className="w-[280px] md:w-[340px] lg:w-[380px] snap-center flex-shrink-0"
+                            >
                                 <ProductCard
                                     {...product}
                                     delay={index * 0.1}
@@ -89,4 +73,4 @@ const Products = () => {
     );
 };
 
-export default Products;
+export default React.memo(Products);
